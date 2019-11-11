@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 2019-11-11
+### Added
+- Logo for README.md to res/logo.svg
+- `eslint` to CHANGELOG.md file
+### Changed
+- README.md
+
 ## [0.1.0] - 2019-11-11
 ### Added
 - CHANGELOG.md
@@ -16,5 +23,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - .gitignore
 - GamesWrapper with `fetchGames`, `createGame`, `join`, `fetchHand`, `start`, `playCard`, `fetchAllPlayedCards`, `pickCard` functions
 - UserWrapper with `register` and `login` function
+- eslint
 
 [Unreleased]: https://github.com/CardJizzerApp/CardJizzerWrapper/compare/v1.0.0...HEAD

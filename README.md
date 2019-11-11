@@ -1,7 +1,7 @@
 <div align="center">
     <img src="./res/logo.svg">
     <h1>CardJizzers' Wrapper</h1>
-    <h3>The wrapper for the CardJizzerBackend.</h3>
+    <h3>The wrapper for CardJizzerBackend.</h3>
 </div>
 
 <div align="center">
