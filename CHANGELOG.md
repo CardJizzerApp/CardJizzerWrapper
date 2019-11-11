@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 2019-11-11
+### Changed
+- Navigation in README.md
+
 ## [0.1.1] - 2019-11-11
 ### Added
 - Logo for README.md to res/logo.svg
@@ -26,3 +30,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - eslint
 
 [Unreleased]: https://github.com/CardJizzerApp/CardJizzerWrapper/compare/v1.0.0...HEAD
+[0.1.0]: https://github.com/CardJizzerApp/CardJizzerWrapper/tree/4d620ba4615d11034739383bd7af67b23bea0929
+[0.1.1]: https://github.com/CardJizzerApp/CardJizzerWrapper/tree/4e0746b0d9b77eb136d98e28ea48d75e19a64cdd

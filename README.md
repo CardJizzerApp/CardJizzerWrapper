@@ -10,9 +10,7 @@
 <div align="center">
 
 [What is this](#what-is-this) | 
-[Motivation](#motivation) | 
-[Installation](#installation) | 
-[Contributing](#contributing)
+[Motivation](#motivation)
 
 </div>
 <hr/>
@@ -34,7 +32,7 @@ We decided to bring fresh air in this game and created this hybrid app which all
 this beautiful game anywhere and anytime.
 
 ### What is this repo about?
-This repository is the wrapper of the backend.
+This repository is a NodeJs wrapper designed for the backend.
 
 Please follow [this][frontend] link for the frontend part of this project.
 
