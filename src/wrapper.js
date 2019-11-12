@@ -1,9 +1,9 @@
 // eslint-disable-next-line
-const { WebsocketWrapper } = require('./websocketWrapper');
-const { GamesWrapper } = require('./gamesWrapper');
-const { UserWrapper } = require('./userWrapper');
+const WebsocketWrapper = require('./websocketWrapper');
+const GamesWrapper = require('./gamesWrapper');
+const UserWrapper = require('./userWrapper');
 
-exports.Wrapper = class {
+module.exports = class Wrapper {
     /**
      * Initializes the WebsocketWrapper
      * @param {WebsocketWrapper} wsWrapper

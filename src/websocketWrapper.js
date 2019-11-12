@@ -1,7 +1,8 @@
+const WebSocket = require('ws');
 // eslint-disable-next-line
 const {CommandObject} = require('./commandObject');
 
-exports.WebsocketWrapper = class WebsocketWrapper {
+module.exports = class WebsocketWrapper {
     /**
      * Initializes the websocket and the commandStack
      * @param {Object} options
@@ -10,8 +11,24 @@ exports.WebsocketWrapper = class WebsocketWrapper {
     constructor(options) {
         this.nextQueueId = 0;
         this.commandStack = [];
-        this.websocket = new WebSocket(options.url);
-        this.websocket.onmessage = (event) => this.handleMessages(event);
+        this.options = options;
+    }
+
+    /**
+     * Initializes the websocket with options given in constructor.
+     */
+    initialize() {
+        return new Promise((resolve, reject) => {
+            this.websocket = new WebSocket(this.options.url);
+            this.websocket.onmessage = (event) => this.handleMessages(event);
+            const handle = setInterval(() => {
+                if (this.websocket.readyState !== 0) {
+                    clearTimeout(handle);
+                    resolve(this);
+                }
+            }, 50);
+            setTimeout(reject, 10 * 1000);
+        });
     }
 
     /**
@@ -25,8 +42,9 @@ exports.WebsocketWrapper = class WebsocketWrapper {
             this.websocket.send(JSON.stringify(commandObject));
 
             const handle = setInterval(() => {
-                const response = JSON.parse(this.readResponse(queueId));
-                if (response !== undefined) {
+                const responseString = this.readResponse(queueId);
+                if (responseString !== undefined) {
+                    const response = JSON.parse(responseString);
                     if (response.errorCode !== 0) {
                         reject(new Error(response.message));
                     }
@@ -63,7 +81,7 @@ exports.WebsocketWrapper = class WebsocketWrapper {
         const object = JSON.parse(JSON.stringify(commandObject));
         object.queueId = this.nextQueueId;
         this.nextQueueId += 1;
-        this.commandStack.push(object.id);
+        this.commandStack.push(object);
         return object.queueId;
     }
 
@@ -72,6 +90,7 @@ exports.WebsocketWrapper = class WebsocketWrapper {
      * @param {number} queueId
      */
     readResponse(queueId) {
-        return this.commandStack.find((c) => c.queueId === queueId).response;
+        const commandObject = this.commandStack.find((c) => c.queueId === queueId);
+        return commandObject === undefined ? -1 : commandObject.response;
     }
 };

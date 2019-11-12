@@ -1,8 +1,14 @@
-exports.CommandObject = require('./commandObject');
+const commandObject = require('./commandObject');
+const websocketWrapper = require('./websocketWrapper');
+const gamesWrapper = require('./gamesWrapper');
+const userWrapper = require('./userWrapper');
+const wrapper = require('./wrapper');
 
-exports.WebsocketWrapper = require('./websocketWrapper');
+exports.CommandObject = commandObject;
 
-exports.GamesWrapper = require('./gamesWrapper');
-exports.UserWrapper = require('./userWrapper');
+exports.WebsocketWrapper = websocketWrapper;
 
-exports.Wrapper = require('./wrapper');
+exports.GamesWrapper = gamesWrapper;
+exports.UserWrapper = userWrapper;
+
+exports.Wrapper = wrapper;

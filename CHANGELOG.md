@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2019-11-12
+### Added
+- Chai and Mocha for testing
+- Now testing the functionality of the `fetchGames` function
+### Changed
+- Export types of each module to `module.exports` in order to use them correctly
+
 ## [0.1.2] - 2019-11-11
 ### Changed
 - Navigation in README.md

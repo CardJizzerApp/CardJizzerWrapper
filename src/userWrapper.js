@@ -1,7 +1,7 @@
 // eslint-disable-next-line
-const { WebsocketWrapper } = require('./websocketWrapper');
+const WebsocketWrapper = require('./websocketWrapper');
 
-exports.UserWrapper = class {
+module.exports = class UserWrapper {
     /**
      * @param {WebsocketWrapper} wsWrapper
      */
