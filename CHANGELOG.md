@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2019-11-13
+### Changed
+- Added paremeter wsWrapper to wrapper in `games.spec.js`
+
 ## [0.2.0] - 2019-11-12
 ### Added
 - Chai and Mocha for testing
