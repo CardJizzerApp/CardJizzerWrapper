@@ -12,6 +12,7 @@ module.exports = class WebsocketWrapper {
         this.nextQueueId = 0;
         this.commandStack = [];
         this.options = options;
+        this.websocket = 0;
     }
 
     /**
@@ -39,8 +40,8 @@ module.exports = class WebsocketWrapper {
     sendCommand(commandObject) {
         return new Promise((resolve, reject) => {
             const queueId = this.appendCommandToStack(commandObject);
+            commandObject.queueId = queueId;
             this.websocket.send(JSON.stringify(commandObject));
-
             const handle = setInterval(() => {
                 const responseString = this.readResponse(queueId);
                 if (responseString !== undefined) {
@@ -48,7 +49,7 @@ module.exports = class WebsocketWrapper {
                     if (response.errorCode !== 0) {
                         reject(new Error(response.message));
                     }
-                    resolve(response);
+                    resolve(response.jsonData);
                     clearInterval(handle);
                 }
             }, 100);

@@ -1,6 +1,6 @@
 {
   "name": "cardjizzerwrapper",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Wrapper for the CardJizzerBackend",
   "main": "index.js",
   "scripts": {
