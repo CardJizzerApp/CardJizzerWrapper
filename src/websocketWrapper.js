@@ -39,25 +39,58 @@ module.exports = class WebsocketWrapper {
      */
     sendCommand(commandObject) {
         return new Promise((resolve, reject) => {
-            const queueId = this.appendCommandToStack(commandObject);
+            const queueId = this.appendCommandToStackWithQueueId(commandObject);
+            // eslint-disable-next-line
             commandObject.queueId = queueId;
             this.websocket.send(JSON.stringify(commandObject));
-            const handle = setInterval(() => {
-                const responseString = this.readResponse(queueId);
-                if (responseString !== undefined) {
-                    const response = JSON.parse(responseString);
-                    if (response.errorCode !== 0) {
-                        reject(new Error(response.message));
-                    }
-                    resolve(response.jsonData);
-                    clearInterval(handle);
-                }
-            }, 100);
-            setTimeout(() => {
-                clearInterval(handle);
-                reject(new Error('Response not sent before timeout expires.'));
-            }, 10 * 1000);
+            this.listenForResponse(resolve, reject, queueId);
         });
+    }
+
+    /**
+     * Appends a commandObject to the commandStack.
+     * @param {CommandObject} commandObject
+     * @return {number} queueId
+     */
+    appendCommandToStackWithQueueId(commandObject) {
+        const object = JSON.parse(JSON.stringify(commandObject));
+        object.queueId = this.nextQueueId;
+        this.nextQueueId += 1;
+        this.commandStack.push(object);
+        return object.queueId;
+    }
+
+    /**
+     * @param {()} resolve
+     * @param {()} reject
+     * @param {number} queueId
+     * Waits until a response comes in with the given queueId
+     */
+    listenForResponse(resolve, reject, queueId) {
+        const handle = setInterval(() => {
+            const responseString = this.readResponse(queueId);
+            if (responseString !== undefined) {
+                const response = JSON.parse(responseString);
+                if (response.errorCode !== 0) {
+                    reject(new Error(response.message));
+                }
+                resolve(response.jsonData);
+                clearInterval(handle);
+            }
+        }, 100);
+        setTimeout(() => {
+            clearInterval(handle);
+            reject(new Error('Response not sent before timeout expires.'));
+        }, 10 * 1000);
+    }
+
+    /**
+     * Checks whether the searched commandObject has a response assigned or not.
+     * @param {number} queueId
+     */
+    readResponse(queueId) {
+        const commandObject = this.commandStack.find((c) => c.queueId === queueId);
+        return commandObject === undefined ? -1 : commandObject.response;
     }
 
     /**
@@ -71,27 +104,5 @@ module.exports = class WebsocketWrapper {
             const commandObject = this.commandStack.find((c) => c.queueId === queueId);
             commandObject.response = response;
         }
-    }
-
-    /**
-     * Appends a commandObject to the commandStack.
-     * @param {CommandObject} commandObject
-     * @return {number} queueId
-     */
-    appendCommandToStack(commandObject) {
-        const object = JSON.parse(JSON.stringify(commandObject));
-        object.queueId = this.nextQueueId;
-        this.nextQueueId += 1;
-        this.commandStack.push(object);
-        return object.queueId;
-    }
-
-    /**
-     * Checks whether the searched commandObject has a response assigned or not.
-     * @param {number} queueId
-     */
-    readResponse(queueId) {
-        const commandObject = this.commandStack.find((c) => c.queueId === queueId);
-        return commandObject === undefined ? -1 : commandObject.response;
     }
 };

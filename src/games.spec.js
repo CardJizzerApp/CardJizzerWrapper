@@ -13,7 +13,6 @@ describe('Game Tests', () => {
                 expect(games, 'GamesObject is undefined.').to.not.be.undefined;
                 done();
             });
-            wrapper.Games.fetchGames().then();
         });
     });
 });

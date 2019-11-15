@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1] - 2019-11-15
+### Refactored
+- A bit of cleanup in websocketWrapper class. It should now be way more clear. 
+
 ## [0.3.0] - 2019-11-14
 ### Added
 - Fixed websocket queueId not sent
