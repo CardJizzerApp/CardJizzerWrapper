@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.2] - 2019-11-15
+### Added
+- Test cases for auth-required commands
+### Fixed
+- CreateGame in `games.spec.js` fixed jsDoc.
+
 ## [0.3.1] - 2019-11-15
 ### Refactored
 - A bit of cleanup in websocketWrapper class. It should now be way more clear. 
@@ -16,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.1] - 2019-11-13
 ### Changed
-- Added paremeter wsWrapper to wrapper in `games.spec.js`
+- Added parameter wsWrapper to wrapper in `games.spec.js`
 
 ## [0.2.0] - 2019-11-12
 ### Added

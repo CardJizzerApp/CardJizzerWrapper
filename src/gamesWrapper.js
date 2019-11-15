@@ -20,7 +20,7 @@ module.exports = class GamesWrapper {
     /**
      * Create a game.
      * @param {Object} gameObject
-     * @param {String} gameObject.gametitle
+     * @param {String} gameObject.title
      * @param {String} gameObject.password
      * @param {String[]} gameObject.deckids
      * @param {number} gameObject.maxplayers
